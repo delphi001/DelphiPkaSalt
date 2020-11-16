@@ -1,0 +1,68 @@
+## This is the run parameter file for executing DelphiPKA program
+## User should also provide PDB file, forcefield parameter and topology
+##
+## NOTE: Lines starting with "#" mark will be skipped.
+##
+
+PDB file name                      : sample.pdb
+Charge parameter                   : param/amber.crg
+Radius parameter                   : param/amber.siz
+Topology parameter                 : param/topology
+
+# By default HETATM is deleted. If user need HETATM for ligand/ion binding
+# Set 1st "F", 3rd "T". And make HETATM in correct PQR format.
+Remove HETATM                      : T
+Remove water molecule              : T
+HETATM in PQR format               : F
+
+# For protonation only, set 2nd and 3rd options "F". Otherwise, all "T"
+Do Protonation                     : T
+Do Energy Calculation              : T
+Do pKa's  Calculation              : T
+
+# Calculate more titratable residues (Ser, Tyr, Thr, Cys)
+# If you enable this, Please use Charge, Radius, and Topology files from param2 dir.
+Calculate More Residues            : F
+
+# 2nd and 3rd options can create PQR format at user-given pH value
+Output PQR file (With Topology)    : T
+Output PQR file (With pKa result)  : T
+At given pH Value                  : 7.0
+
+# Parameters for Gaussian function in DelPhi
+# 2nd represents variance (sigma) in Gaussian function
+# 3rd represents reference dielectric constant
+# 4th represents solvent   dielectric constant
+# 5th represents number of grids/Angstrom for initial delphi run.
+#     for large systems memory requirement may be very high with scale
+#     1.0, so one can consider decreasing scale till 0.3 or so.
+#     when scale is smaller than 1.0 increase focusing to scale ratio to 3
+# 6th represents the scale ratio for focusing run to initial run
+#     if initial scale is say 1.0 and focusing to initial scale 
+#     ratio is 2, then two focusing rus will have scales of 1.0 * 2
+#     = 2.0 and 2.0 * 2 i.e. 4.0 respectively.
+Gaussian surface                   : 1
+Surface cutoff                     : 20
+Variance of Gaussian distribution  : 0.70
+Internal Dielectric                : 8.0
+External Dielectric                : 80.0
+Initial scale                      : 1.0
+Focusing to initial scale ratio    : 2
+
+# Clustering/Network Partiton.     Default is Network for more accuracy.
+# Kmean is slightly faster in some case. Turn Kmean on, delete 1st line below
+Cluster Delimitation Threshold (A) : 12.0
+Kmean++ cluster number             : AUTO
+
+# Choose Hydrogen attach Atom of GLU or ASP
+# Defualt is OE2 for GLU / OD2 for ASP
+Hydrogen of GLU Attached to Atom   : OE1
+Hydrogen of ASP Attached to Atom   : OD1
+
+# pH Range and interval
+pH Initial Value                   : 0.0
+pH End Value                       : 14.0
+pH Interval                        : 0.5
+
+# Salt Concentration
+Salt Concentration                 : 0.15
