@@ -1,4 +1,4 @@
-# DelphiPka v2.3
+# DelphiPkaSalt v2.3
 Delphi-PKA is a DelPhi-based C++ program, allowing to predict pKa's for ionizable groups in proteins, RNA and DNA.
 Unique approach stems from:
 1. Use gaussian-based smooth function to mimic conformational changes associated with ionization changes.
@@ -8,8 +8,8 @@ Our web server: <http://compbio.clemson.edu/pka_webserver/>
 
 For questions and help, visit <http://compbio.clemson.edu/forum/> or email to <delphi@g.clemson.edu>
 
-## Running DelphiPka on a PC
-### Compile DelphiPka
+## Running DelphiPkaSalt on a PC
+### Compile DelphiPkaSalt
 To compile the source code, you will need following library:
 * [boost library](http://www.boost.org)
 * [GSL library](http://www.gnu.org/software/gsl/) (GNU Scientific Library)
@@ -32,7 +32,7 @@ Then change the `CC` entry in `Makefile` to `g++` or `clang++`
 If you want to build the static version, you can modify the Makefile,
 and add `-static` in `CFLAGS` entry and `LDFLAGS` entry (only support without MPI).
 
-## Running DelphiPka on Palmetto HPC
+## Running DelphiPkaSalt on Palmetto HPC
 ### With PBS script (Recommend)
 ```bash
 # login to the palmetto HPC login node
@@ -55,8 +55,8 @@ You need to load the following modules on Palmetto first:
 # Recommend flag: select=1:ncpus=8:mem=40gb:mpiprocs=8:interconnect=fdr,walltime=72:00:00
 module purge
 module add gcc/4.8.1 openmpi/1.6.4 gsl/1.16
-git clone https://github.com/delphi001/DelphiPka.git
-cd DelphiPka
+git clone https://github.com/delphi001/DelphiPkaSalt.git
+cd DelphiPkaSalt
 make -j8
 
 mpirun --mca btl openib,self --mca btl_openib_warn_nonexistent_if 0 -np 8 bin/delphiPKa run.prm
